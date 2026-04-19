@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes yh-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes yh-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes yh-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@layer utilities {
+  .yh-animate-up {
+    animation: yh-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+  }
+
+  .yh-animate-in {
+    animation: yh-fade-in 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  .yh-delay-1 {
+    animation-delay: 80ms;
+  }
+  .yh-delay-2 {
+    animation-delay: 140ms;
+  }
+  .yh-delay-3 {
+    animation-delay: 200ms;
+  }
+  .yh-delay-4 {
+    animation-delay: 260ms;
+  }
+
+  .yh-hero-shine {
+    background-size: 200% 100%;
+    animation: yh-shimmer 10s ease-in-out infinite alternate;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yh-animate-up,
+  .yh-animate-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .yh-hero-shine {
+    animation: none !important;
+  }
 }
