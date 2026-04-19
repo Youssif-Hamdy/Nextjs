@@ -12,7 +12,6 @@ export type ProductCreateInput = {
   thumbnail?: string;
 };
 
-// GET ALL (for SSG / server)
 export async function getAllProducts() {
   const res = await fetch(`${BASE_URL}?limit=100`, { cache: "force-cache" });
   if (!res.ok) throw new Error("Failed to fetch products");
@@ -27,7 +26,6 @@ export async function getProductById(id: number): Promise<Product | null> {
   return res.json() as Promise<Product>;
 }
 
-// POST (CREATE) — DummyJSON: /products/add
 export async function createProduct(data: ProductCreateInput) {
   const res = await fetch(`${BASE_URL}/add`, {
     method: "POST",
@@ -38,7 +36,6 @@ export async function createProduct(data: ProductCreateInput) {
   return res.json() as Promise<Product>;
 }
 
-// PUT (UPDATE)
 export async function updateProduct(
   id: number,
   data: Partial<Product>
@@ -52,7 +49,6 @@ export async function updateProduct(
   return res.json() as Promise<Product>;
 }
 
-// DELETE BY ID
 export async function deleteProduct(id: number) {
   const res = await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
   if (!res.ok) throw new Error("Failed to delete product");

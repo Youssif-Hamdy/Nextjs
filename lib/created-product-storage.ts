@@ -1,6 +1,5 @@
 import type { Product } from "@/types/product";
 
-/** DummyJSON POST /add returns a mock id that often has no GET /products/:id — we keep a browser copy. */
 export const localCreatedProductKey = (id: number) =>
   `yh:created-product:${id}`;
 
