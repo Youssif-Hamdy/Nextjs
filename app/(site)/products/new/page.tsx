@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createProduct, type ProductCreateInput } from "@/lib/api";
-import { saveCreatedProductLocally } from "@/lib/created-product-storage";
 
 const defaultForm: ProductCreateInput = {
   title: "",
@@ -51,7 +50,6 @@ export default function NewProductPage() {
         stock: form.stock,
         thumbnail: form.thumbnail?.trim() || defaultForm.thumbnail,
       });
-      saveCreatedProductLocally(created);
       router.push(`/products/${created.id}`);
     } catch (err) {
       setError(

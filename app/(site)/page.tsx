@@ -21,7 +21,7 @@ export default function HomePage() {
           YH Store
         </p>
         <h1 className="yh-animate-up yh-delay-1 mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl">
-  Discover products you'll love.
+          Discover products you&apos;ll love.
 </h1>
 <p className="yh-animate-up yh-delay-2 mx-auto mt-5 max-w-md text-base leading-relaxed text-neutral-400">
   Browse our collection of high-quality items carefully selected to meet your needs.

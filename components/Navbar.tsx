@@ -11,6 +11,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/products", label: "Products" },
+    { href: "/news", label: "News" },
     { href: "/about", label: "About" },
   ];
 
@@ -20,7 +21,7 @@ export default function Navbar() {
   const linkActive =
     "text-white after:scale-x-100 after:bg-red-950";
 
-  const staggerDelays = ["yh-delay-1", "yh-delay-2", "yh-delay-3"];
+  const staggerDelays = ["yh-delay-1", "yh-delay-2", "yh-delay-3", "yh-delay-4"];
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-neutral-950">
