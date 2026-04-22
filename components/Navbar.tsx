@@ -3,10 +3,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Logo from "./Logo";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { data: session, status } = useSession();
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -45,12 +47,28 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          <Link
-            href="/login"
-            className="hidden rounded-lg bg-red-950 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-red-950/30 transition duration-200 hover:bg-black hover:shadow-black/25 sm:inline-flex"
-          >
-            Login
-          </Link>
+          {status !== "loading" && !session && (
+            <Link
+              href="/login"
+              className="hidden rounded-lg bg-red-950 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-red-950/30 transition duration-200 hover:bg-black hover:shadow-black/25 sm:inline-flex"
+            >
+              Login
+            </Link>
+          )}
+          {status !== "loading" && session && (
+            <div className="hidden items-center gap-3 sm:flex">
+              <span className="text-sm font-semibold text-neutral-200">
+                {session.user?.name ?? session.user?.email ?? "Account"}
+              </span>
+              <button
+                type="button"
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                Logout
+              </button>
+            </div>
+          )}
 
           <button
             type="button"
@@ -107,13 +125,26 @@ export default function Navbar() {
             </li>
           ))}
           <li className="pt-2">
-            <Link
-              href="/login"
-              onClick={() => setOpen(false)}
-              className="block rounded-lg bg-red-950 px-3 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-black"
-            >
-              Login
-            </Link>
+            {!session ? (
+              <Link
+                href="/login"
+                onClick={() => setOpen(false)}
+                className="block rounded-lg bg-red-950 px-3 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-black"
+              >
+                Login
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  void signOut({ callbackUrl: "/" });
+                }}
+                className="block w-full rounded-lg bg-white/5 px-3 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                Logout
+              </button>
+            )}
           </li>
         </ul>
       </div>

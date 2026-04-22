@@ -122,7 +122,7 @@ export default function ProductsClient({
             All products
           </h1>
           <p className="mt-2 max-w-xl text-neutral-600">
-            Browse, filter, and buy products (MongoDB + Mongoose).
+            product
           </p>
         </div>
         <Link
