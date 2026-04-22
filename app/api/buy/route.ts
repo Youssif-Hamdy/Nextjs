@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   const items = Array.isArray(body.items) ? body.items : [];
   if (items.length === 0) {
     return NextResponse.json(
-      { error: "items is required" },
+      { error: "items is requird" },
       { status: 400 }
     );
   }
